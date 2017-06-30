@@ -1,0 +1,39 @@
+{
+  "private": true,
+  "name": "webster",
+  "version": "1.0.0",
+  "author": "Demjan Drozdov",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js",
+    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=webpack.config.js",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "bootstrap": "4.0.0-alpha.6",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "vue": "^2.3.4"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "browser-sync": "^2.18.12",
+    "browser-sync-webpack-plugin": "^1.1.4",
+    "clean-webpack-plugin": "^0.1.16",
+    "cross-env": "^5.0.1",
+    "html-webpack-plugin": "^2.29.0",
+    "laravel-mix": "0.*",
+    "pug": "^2.0.0-rc.2",
+    "pug-loader": "^2.3.0",
+    "raw-loader": "^0.5.1",
+    "string-replace-loader": "^1.2.0",
+    "url-join": "^2.0.2",
+    "webfonts-loader": "^1.2.0"
+  }
+}
