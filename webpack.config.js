@@ -7,6 +7,7 @@ let dotenv = require('dotenv');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let CleanWebpackPlugin = require('clean-webpack-plugin');
+let createPages = require('./build/createPages');
 
 /*
  |--------------------------------------------------------------------------
@@ -241,7 +242,7 @@ let rules = [
     },
 ];
 
-let extensions = ['*', '.js', '.jsx', '.vue'];
+let extensions = ['*', '.js', '.json', '.vue', '.scss', '.pug'];
 
 if (Mix.ts) {
     rules.push({
@@ -376,12 +377,7 @@ plugins.push(
       verbose: false
     }),
 
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'src/templates/pages/index.pug',
-      inject: true,
-      minify: false
-    }),
+    ...createPages(),
 
     new webpack.ProvidePlugin(Mix.autoload || {}),
 

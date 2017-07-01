@@ -6,7 +6,10 @@ new Vue({
   el: '#app',
   data() {
     return {
-      text: 'VUE Text'
+      text: 'VUE'
     }
+  },
+  mounted() {
+    // console.log($);
   }
 })
