@@ -1,4 +1,4 @@
-import './vendor';
+// import './vendor';
 
 import Vue from 'vue'
 
@@ -10,6 +10,6 @@ new Vue({
     }
   },
   mounted() {
-    // console.log($);
+    console.log($);
   }
 })
