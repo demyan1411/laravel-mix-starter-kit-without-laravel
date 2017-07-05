@@ -1,5 +1,5 @@
 node_modules
-dist
+
 /public/hot
 /public/js/
 /public/css/
@@ -14,3 +14,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+maket

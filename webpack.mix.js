@@ -1,14 +1,27 @@
-const { mix } = require('laravel-mix');
+const { mix } = require('./laravel-mix');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 let CleanWebpackPlugin = require('clean-webpack-plugin');
 let createPages = require('./build/createPages');
 let path = require('path');
 
-// mix.disableNotifications();
+mix.disableNotifications();
+
+mix.options({
+  processCssUrls: true,
+  // postCss: [require('autoprefixer')]
+});
 
 mix.webpackConfig({
     resolve: {
-      extensions: ['*', '.js', '.json', '.vue', '.scss', '.pug']
+      extensions: ['*', '.js', '.json', '.vue', '.scss', '.pug'],
+      alias: {
+        'vue$': 'vue/dist/vue.common.js',
+        'src': path.resolve(__dirname, 'src'),
+        'assets': path.resolve(__dirname, 'src/assets'),
+        'js': path.resolve(__dirname, 'src/assets/js'),
+        'images': path.resolve(__dirname, 'src/assets/images'),
+        'fonts': path.resolve(__dirname, 'src/assets/fonts')
+      }
     },
     module: {
         rules: [
@@ -36,10 +49,10 @@ mix.webpackConfig({
         ]
     },
     plugins: [
-      // new CleanWebpackPlugin(['dist/*'], {
-      //   root: __dirname,
-      //   verbose: false
-      // }),
+      new CleanWebpackPlugin(['dist/*'], {
+        root: __dirname,
+        verbose: false
+      }),
 
       ...createPages(),
     ]
@@ -47,10 +60,10 @@ mix.webpackConfig({
 
 mix.browserSync({
     proxy: false,
+    // proxy: "localhost",
+    // serveStatic: ['dist'],
     server: 'dist',
     files: [
-        'app/**/*.php',
-        'resources/views/**/*.php',
         'dist/js/**/*.js',
         'dist/css/**/*.css',
         'dist/*.html'
@@ -69,16 +82,18 @@ mix.browserSync({
  */
 
 mix.setPublicPath('dist/');
+mix.setResourceRoot('');
 
 mix.autoload({
     jquery: ['$', 'window.jQuery', 'jQuery'],
     tether: ['window.Tether', 'Tether']
 });
 
-mix.js('src/assets/js/app.js', 'assets/js')
-   .extract(['jquery','bootstrap','vue','tether']);
+// mix.js('src/assets/js/app.js', 'js');
+//
+// mix.extract(['jquery','bootstrap','vue','tether']);
 
-mix.sass('src/assets/scss/app.scss', 'assets/css');
+// mix.sass('src/assets/scss/app.scss', 'css');
 
 // pathFromPublic(publicPath) {
 //     publicPath = path.normalize(publicPath || Config.publicPath);
