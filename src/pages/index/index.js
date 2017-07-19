@@ -1,2 +1,2 @@
-// import './index.scss'
+import './qwe'
 console.log('index');

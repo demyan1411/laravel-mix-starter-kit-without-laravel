@@ -1,2 +1,2 @@
-// import './test.scss'
+import './test.scss'
 console.log('test');

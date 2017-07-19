@@ -13,6 +13,14 @@ mix.options({
 });
 
 mix.webpackConfig({
+    entry: getEntryPages(),
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '',
+        filename: 'js/[name].js',
+        chunkFilename: 'js/[id].js',
+        library: '[name]'
+      },
     resolve: {
       extensions: ['*', '.js', '.json', '.vue', '.scss', '.pug'],
       alias: {
@@ -47,6 +55,15 @@ mix.webpackConfig({
               test: /\.pug$/,
               loaders: ['pug-loader?pretty=true']
           },
+            // {
+            //     test: /\.scss$/,
+            //     use: ExtractTextPlugin.extract({
+            //         fallback: 'style-loader',
+            //         use: ['css-loader', 'resolve-url-loader', 'sass-loader']
+            //     }, {
+            //         publicPath: '../'
+            //     })
+            // }
         ]
     },
     plugins: [
@@ -89,19 +106,17 @@ mix.browserSync({
 mix.setPublicPath(path.normalize('dist'));
 // mix.setResourceRoot('../');
 
-// mix.autoload({
-//     jquery: ['$', 'window.jQuery', 'jQuery'],
-//     tether: ['window.Tether', 'Tether']
-// });
+mix.autoload({
+    jquery: ['$', 'window.jQuery', 'jQuery'],
+    tether: ['window.Tether', 'Tether']
+});
 
 
 
-mix.js('src/assets/js/main/main.js', 'js/main');
-// mix.extract(['jquery','bootstrap','vue','tether']);
-mix.sass('src/assets/scss/main.scss', 'css/main');
-mix.copyDirectory('src/assets/images', 'dist/images')
-
-getEntryPages();
+mix.js(path.normalize('src/assets/js/main.js'), '/');
+mix.extract(['jquery','bootstrap','vue','tether']);
+// mix.sass('src/assets/scss/main.scss', 'css/main');
+// mix.copyDirectory('src/assets/images', 'dist/images')
 
 // pathFromPublic(publicPath) {
 //     publicPath = path.normalize(publicPath || Config.publicPath);
