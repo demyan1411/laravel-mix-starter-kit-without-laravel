@@ -1,0 +1,32 @@
+html,
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: $font-size;
+    font-family: $font-family;
+    line-height: 19px;
+}
+
+input[type=file] {
+    outline: 0;
+    display: block;
+    font: caption;
+}
+
+textarea {
+    resize: none;
+}
+
+[v-cloak] {
+    display: none !important;
+}
+.robotocon {
+    font-family: $robotocon;
+}
+
+.wrapper {
+    max-width: 1100px;
+    width: 100%;
+    padding: 0 10px;
+    margin: 0 auto;
+}

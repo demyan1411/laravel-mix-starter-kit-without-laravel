@@ -1,9 +1,4 @@
 extends ../layouts/base.pug
 
 block content
-  #app
-    .container
-      .row
-        .col
-          img.logo(src=require('images/logo.svg'))
-          div {{ text }}
+  include ../common/partials/header

@@ -1,14 +1,15 @@
-const { mix } = require('./laravel-mix');
+const { mix } = require('laravel-mix');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 let CleanWebpackPlugin = require('clean-webpack-plugin');
 let createPages = require('./build/createPages');
+let getEntryPages = require('./build/getEntryPages');
 let path = require('path');
 
 mix.disableNotifications();
 
 mix.options({
-  processCssUrls: true,
-  // postCss: [require('autoprefixer')]
+  processCssUrls: false,
+  postCss: [require('autoprefixer')]
 });
 
 mix.webpackConfig({
@@ -54,6 +55,10 @@ mix.webpackConfig({
         verbose: false
       }),
 
+      new ExtractTextPlugin('css/[name].css', {
+        allChunks: true
+    }),
+
       ...createPages(),
     ]
 });
@@ -81,19 +86,22 @@ mix.browserSync({
  |
  */
 
-mix.setPublicPath('dist/');
-mix.setResourceRoot('');
+mix.setPublicPath(path.normalize('dist'));
+// mix.setResourceRoot('../');
 
-mix.autoload({
-    jquery: ['$', 'window.jQuery', 'jQuery'],
-    tether: ['window.Tether', 'Tether']
-});
+// mix.autoload({
+//     jquery: ['$', 'window.jQuery', 'jQuery'],
+//     tether: ['window.Tether', 'Tether']
+// });
 
-// mix.js('src/assets/js/app.js', 'js');
-//
+
+
+mix.js('src/assets/js/main/main.js', 'js/main');
 // mix.extract(['jquery','bootstrap','vue','tether']);
+mix.sass('src/assets/scss/main.scss', 'css/main');
+mix.copyDirectory('src/assets/images', 'dist/images')
 
-// mix.sass('src/assets/scss/app.scss', 'css');
+getEntryPages();
 
 // pathFromPublic(publicPath) {
 //     publicPath = path.normalize(publicPath || Config.publicPath);

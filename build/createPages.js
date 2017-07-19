@@ -13,7 +13,12 @@ module.exports = function () {
                 : pageName + '.html',
             template: 'src/templates/pages/' + pageName,
             inject: true,
-            minify: false
+            minify: false,
+            chunksSortMode: 'none',
+            chunks: [
+              path.normalize('js/main/main'),
+              path.normalize(`js/${pageName}/${pageName}`)
+            ]
         }
 
         return new HtmlWebpackPlugin(options)
